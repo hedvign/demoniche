@@ -1,0 +1,82 @@
+---
+title: "Intro_Hudsonia_montana"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Intro_Hudsonia_montana}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(demoniche)
+```
+
+# Introduction
+
+`demoniche` is a freely available R-package to simulate stochastic population growth for various subpopulations of a species. 
+Demographic models projects population sizes with various transition matrices that represent demographic impacts on species growth. 
+The Demographic modelling is linked to a time series of geographically distributed 'Niche values' that also affect species growth. 
+The `demoniche` model offers flexible options for stochasticity, density dependence and dispersal. 
+With the demoniche package it is possible to investigate population sizes, extinction probabilities and range shift of a species influenced by scenarios of environmental and human impacts.
+The `demoniche` package is offered without any guarantees, and we encourage users to examine the code to learn what is modelled, and to adapt it to their own needs. The annotated code can be found when browsing the **GITHUB UPDATE THIS**.
+
+The main steps to running a model are as follows:
+
+1. Load or write the information (demographical, geographical) of the species that is being modelled
+2. Create a species object with demoniche_setup function, which contains all the information about the species
+3. Run the demoniche_model function on the species object
+4. Analyse the results
+
+
+# Installing `demoniche`
+
+SECTION NEEDS TO BE UPDATED
+
+# Example simulation
+
+## Loading data supplied with package
+
+We load the example data file supplied in the package. 
+The object is called `Hmontanta` and contains demographic and geographic data about Mountain Goldenheater *Hudsonia montana* (Gross et al. 1998). 
+
+```{r}
+data(Hmontana)
+```
+
+We can inspect the object with the `str()` function. 
+We find that `Hmontana` is a list with 26 items. 
+We can examine separate items of the list using `$`. 
+This object contains all the information needed about the species to carry out modelling.
+
+```{r}
+str(Hmontana)
+```
+
+## Running simulations
+
+We use the modelling function `demoniche_model(modelname, Niche, Dispersal, repetitions, foldername)` to carry out the demographic modelling, and specifying the `Hmontana` list of species information as the species object we want to use. 
+As arguments to the function the user also needs to specify if you want to run simulations with the effects of the Niche values (TRUE or FALSE) and if you want to allow long-distance dispersal (TRUE or FALSE). 
+You also need to specify how many repetitions you want to carry out (for stochastic simulations the number should be over 1000), and a name for the folder where the simulations will be stored. 
+But all these simulations are carried out with the same species information.
+
+The `demoniche_model` function runs two internal functions, `demoniche_population` that carries out demographic modelling, and `demoniche_dispersal` which calculates the dispersal values if selected.
+
+When we run the `demoniche_model` function messages are printed on the screen, to let us know how the simulations are going.
+
+```{r run_hmontana_sim}
+noCC_nodispersal <- demoniche_model(modelname = "Hmontana", 
+                                    Niche = FALSE, 
+                                    Dispersal = FALSE, 
+                                    repetitions = 2,
+                                    foldername = "noCC_nodispersal")
+```
+

@@ -1,0 +1,25 @@
+Package: demoniche
+Title: A Spatial Population Dynamics Simulation Tool
+Version: 1.0.1
+Authors@R: 
+    person(given = "Hedvig",
+           family = "Nenzen",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: demoniche carries out spatially-explicit 
+    demographic modelling. The model simulates stochastic 
+    and gradual niche changes, to investigate population 
+    dynamics and persistence in space and time.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+    popbio,
+    sp,
+    lattice
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 7.0.2
